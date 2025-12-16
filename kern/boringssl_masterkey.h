@@ -211,6 +211,7 @@ int probe_ssl_master_key(struct pt_regs *ctx) {
 #endif
 
     // Get ssl3_state_st pointer
+    debug_bpf_printk("bpf_probe_read ssl_s3_st_ptr pointer: %p\n", (void *)ssl_s3_st_ptr);
     ret = bpf_probe_read_user(&address, sizeof(address), ssl_s3_st_ptr);
     if (ret) {
         debug_bpf_printk("bpf_probe_read ssl_s3_st_ptr pointer failed, ret :%d\n", ret);
